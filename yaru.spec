@@ -114,6 +114,8 @@ fi
 %{_datadir}/sounds/Yaru/
 
 %changelog
+* Wed Apr 24 2019 Guillaume Fayard <guillaume DOT fayard AT pycolore DOT fr> r29
+- Updated to r29 release
 
 * Thu Nov 15 2018 David Va <davidva AT tuta DOT io> 18.10.7-3
 - Updated to current commit

@@ -45,5 +45,5 @@ rm /usr/lib64/libcurl-gnutls.so.4
 rm /usr/share/applications/gitkraken.desktop
 
 %changelog
-* Thu Dec  6 2018 builder
-- 
+* Wed Apr 24 2019 Guillaume Fayard <guillaume DOT fayard AT pycolore DOT fr> 5.0.4
+- Created COPR Repository
