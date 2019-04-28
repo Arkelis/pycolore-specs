@@ -1,33 +1,40 @@
+%global pyname simple_dnf
+%global debug_package %{nil}
+
 Name:           simple-dnf
-Version:        alpha
-Release:        0.2%{?dist}
+Version:        0.1.1
+Release:        1%{?dist}
 Summary:        Simple GUI for DNF
 
-License:        GPLv3
+License:        GPLv3+
 URL:            https://hyakosm.net/articles/2018/11/27/simple-dnf.html
 
-AutoReqProv: no
+Source0:        https://github.com/Arkelis/simple_dnf/archive/v%version.tar.gz
+Patch0:         simple-dnf.patch
+AutoReqProv:    no
+BuildRequires:  python3-devel
 Requires:       python3-dnfdaemon
+BuildArch:      noarch
 
 %description
 Simple DNF GUI for installing or removing packages.
 
+%prep
+%setup -n %pyname-%{version}
+%patch0 -p1
+
+%build
+%py3_build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/usr/bin
-mkdir -p $RPM_BUILD_ROOT/usr/lib/python3.7/site-packages/simple_dnf
-cp -r ~/simple-dnf/simple_dnf/. $RPM_BUILD_ROOT/usr/lib/python3.7/site-packages/simple_dnf
-cp $RPM_BUILD_ROOT/usr/lib/python3.7/site-packages/simple_dnf/simple-dnf $RPM_BUILD_ROOT/usr/bin/simple-dnf
-chmod +x $RPM_BUILD_ROOT/usr/bin/simple-dnf
+%py3_install
 
 %post
 cat > /usr/share/applications/simple-dnf.desktop <<EOL
 [Desktop Entry]
 Name=Simple DNF
 Comment=DNF GUI
-Exec=/usr/lib/python3.7/site-packages/simple_dnf/main.py
-Path=/usr/lib/python3.7/site-packages/simple_dnf/
+Exec=simple-dnf
 Icon=system-software-install
 Type=Application
 Encoding=UTF-8
@@ -38,8 +45,9 @@ StartupNotify=true
 EOL
 
 %files
-/usr/lib/python3.7/site-packages/simple_dnf/
-/usr/bin/simple-dnf
+%{python3_sitelib}/%{pyname}-*.egg-info/
+%{python3_sitelib}/%{pyname}/
+%{_bindir}/simple-dnf
 
 %postun
 rm /usr/share/applications/simple-dnf.desktop
