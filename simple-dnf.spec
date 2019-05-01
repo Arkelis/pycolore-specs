@@ -2,7 +2,7 @@
 %global debug_package %{nil}
 
 Name:           simple-dnf
-Version:        0.1.1
+Version:        0.1.2
 Release:        1%{?dist}
 Summary:        Simple GUI for DNF
 
@@ -53,5 +53,5 @@ EOL
 rm /usr/share/applications/simple-dnf.desktop
 
 %changelog
-* Thu Dec  6 2018 builder
-- 
+* Wed May 1 2019 Guillaume Fayard <guillaume DOT fayard AT pycolore DOT fr> 0.1.2
+- Bump to v0.1.2
