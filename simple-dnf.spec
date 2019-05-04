@@ -3,7 +3,7 @@
 
 Name:           simple-dnf
 Version:        0.1.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Simple GUI for DNF
 
 License:        GPLv3+
@@ -13,6 +13,7 @@ Source0:        https://github.com/Arkelis/simple_dnf/archive/v%version.tar.gz
 Patch0:         simple-dnf.patch
 AutoReqProv:    no
 BuildRequires:  python3-devel
+BuildRequires:  desktop-file-utils
 Requires:       python3-dnfdaemon
 BuildArch:      noarch
 
@@ -20,17 +21,14 @@ BuildArch:      noarch
 Simple DNF GUI for installing or removing packages.
 
 %prep
-%setup -n %pyname-%{version}
+%setup -q -n %pyname-%{version}
 %patch0 -p1
 
 %build
 %py3_build
 
 %install
-%py3_install
-
-%post
-cat > /usr/share/applications/simple-dnf.desktop <<EOL
+cat > %name.desktop <<EOL
 [Desktop Entry]
 Name=Simple DNF
 Comment=DNF GUI
@@ -40,17 +38,19 @@ Type=Application
 Encoding=UTF-8
 Categories=System;Settings;PackageManager;
 Keywords=dnf;packages;
-StarupWMClass="Simple DNF"
+X-StarupWMClass="Simple DNF"
 StartupNotify=true
 EOL
+%py3_install
+desktop-file-install --add-category="System" \
+                     --dir=%{buildroot}%{_datadir}/applications \
+                     %name.desktop
 
 %files
 %{python3_sitelib}/%{pyname}-*.egg-info/
 %{python3_sitelib}/%{pyname}/
 %{_bindir}/simple-dnf
-
-%postun
-rm /usr/share/applications/simple-dnf.desktop
+%{_datadir}/applications/%name.desktop
 
 %changelog
 * Wed May 1 2019 Guillaume Fayard <guillaume DOT fayard AT pycolore DOT fr> 0.1.2
