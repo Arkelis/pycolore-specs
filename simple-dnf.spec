@@ -42,9 +42,7 @@ X-StarupWMClass="Simple DNF"
 StartupNotify=true
 EOL
 %py3_install
-desktop-file-install --add-category="System" \
-                     --dir=%{buildroot}%{_datadir}/applications \
-                     %name.desktop
+desktop-file-install --dir=%{buildroot}%{_datadir}/applications %name.desktop
 
 %files
 %{python3_sitelib}/%{pyname}-*.egg-info/
