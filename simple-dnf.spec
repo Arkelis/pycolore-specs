@@ -2,16 +2,17 @@
 %global debug_package %{nil}
 
 Name:           simple-dnf
-Version:        0.1.2
-Release:        2%{?dist}
+Version:        0.1.3
+Release:        1%{?dist}
 Summary:        Simple GUI for DNF
 
 License:        GPLv3+
 URL:            https://hyakosm.net/articles/2018/11/27/simple-dnf.html
 
 Source0:        https://github.com/Arkelis/simple_dnf/archive/v%version.tar.gz
+# The following patch generates setup.py, as poetry does not use setuptools but distutils.
+# See: https://github.com/sdispater/poetry/issues/866
 Patch0:         simple-dnf.patch
-AutoReqProv:    no
 BuildRequires:  python3-devel
 BuildRequires:  desktop-file-utils
 Requires:       python3-dnfdaemon
@@ -50,6 +51,16 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications %name.desktop
 %{_bindir}/simple-dnf
 %{_datadir}/applications/%name.desktop
 
+%doc README.md
+
+%license LICENSE
+
 %changelog
-* Wed May 1 2019 Guillaume Fayard <guillaume DOT fayard AT pycolore DOT fr> 0.1.2
+* Wed Jul 3 2019 Guillaume Fayard <guillaume DOT fayard AT pycolore DOT fr> 0.1.3-1
+- Some packaging fixes
+
+* Mon May 13 2019 Guillaume Fayard <guillaume DOT fayard AT pycolore DOT fr> 0.1.2-3
+- Some packaging fixes
+
+* Wed May 1 2019 Guillaume Fayard <guillaume DOT fayard AT pycolore DOT fr> 0.1.2-2
 - Bump to v0.1.2
