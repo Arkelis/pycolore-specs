@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           yaru
-Version:        r29
+Version:        19.10.1
 Release:        1%{?dist}
 Summary:        Ubuntu community theme "yaru" 
 
@@ -114,6 +114,8 @@ fi
 %{_datadir}/sounds/Yaru/
 
 %changelog
+* Fri Aug 30 2019 Guillaume Fayard <guillaume DOT fayard AT pycolore DOT fr> 19.10.1-1
+
 * Wed Apr 24 2019 Guillaume Fayard <guillaume DOT fayard AT pycolore DOT fr> r29
 - Updated to r29 release
 

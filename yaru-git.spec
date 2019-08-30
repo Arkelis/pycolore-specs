@@ -1,5 +1,5 @@
 %global debug_package %{nil}
-%global commit        a9e1b964134aaac553f4987d509629ff9295f59b
+%global commit        e4f61c45f69131281dbce8ad305c75673fcf4b80
 %global shortcommit   %(c=%{commit}; echo ${c:0:7})
 %global date          20190504
 Name:           yaru-git
